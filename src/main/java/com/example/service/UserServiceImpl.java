@@ -1,29 +1,26 @@
 package com.example.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.DAO.UserDao;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.example.DAO.RoleDao;
-import com.example.DAO.UserDaoImpl;
-import com.example.DAO.UserRolesDao;
 import com.example.model.Role;
 import com.example.model.User;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 @Service
 public class UserServiceImpl implements UserService {
 
-    @Autowired
-    private UserDaoImpl userDao;
+    private final UserDao userDao;
 
-    @Autowired
-    private RoleDao roleDao;
+    private final RoleDao roleDao;
 
-    private UserRolesDao userRolesDao;
+    public UserServiceImpl(UserDao userDao, RoleDao roleDao) {
+        this.userDao = userDao;
+        this.roleDao = roleDao;
+    }
 
     @Override
     @Transactional
@@ -63,12 +60,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void addUserRoles(Long userId, String userRoles) {
-        userRolesDao.addUserRoles(userId, userRoles);
-    }
-
-    @Override
-    @Transactional
     public Role findByRole(String role) {
         return roleDao.findByRole(role);
     }
@@ -90,4 +81,5 @@ public class UserServiceImpl implements UserService {
     public List<Role> getAllRoles() {
         return roleDao.getAllRoles();
     }
+
 }

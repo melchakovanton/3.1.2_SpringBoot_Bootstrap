@@ -20,8 +20,6 @@ public interface UserService {
 
     User getUserByName(String name);
 
-    void addUserRoles(Long userId, String userRoles);
-
     Role findByRole(String role);
 
     Role findByRole(Long id);

@@ -36,14 +36,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable()
+        http
+                .csrf().disable()
                 .authorizeRequests()
-                .anyRequest().authenticated()
-                .and().formLogin()
-                .loginPage("/login")
-                .permitAll()
-                .successHandler(new LoginSuccessHandler())
-                .and().logout();
+                    .antMatchers("/admin/**").hasAnyAuthority("ADMIN")
+
+                    .antMatchers("/user").hasAnyAuthority("USER")
+                    .antMatchers("/login").permitAll()
+                    .antMatchers("/", "/*.css").permitAll()
+
+                //прописать url для Админа И Юзеров!!!
+
+                    .anyRequest().authenticated()
+                    .and()
+                .formLogin()
+                    .loginPage("/login")
+                    .permitAll()
+                    .successHandler(new LoginSuccessHandler())
+                    .and()
+                .logout();
     }
 
     @Bean

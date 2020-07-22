@@ -84,12 +84,13 @@
                                 </div>
                             </div>
                         </div>
+<!--Добавление Пользователя-->
                         <div id="new_user" class="tab-pane fade border rounded" role="tabpanel" aria-labelledby="nav-profile-tab">
                             <h4 class="m-2">Add New User</h4>
                             <div class="container-fluid bg-light">
                                 <div class="row justify-content-center p-3">
                                     <div class="col-4">
-                                        <form th:action="@{/adduser}" method="post">
+                                        <form th:action="@{/admin/adduser}" method="post">
                                             <div class="form-group text-center font-weight-bold">
                                                 <label for="login">Login</label>
                                                 <input type="text" class="form-control" id="login" name="login" required>
@@ -104,9 +105,9 @@
                                                     <tr th:each="role : ${roles}">
                                                         <td><option th:value="${role.getId()}" th:text="${role.getRole()}"></option></td>
                                                     </tr>
-                                                    <option value="1" selected>USER</option>
-                                                    <option value="2">ADMIN</option>
-                                                    <option value="3">MANAGER</option>
+<!--                                                    <option value="1" selected>USER</option>-->
+<!--                                                    <option value="2">ADMIN</option>-->
+<!--                                                    <option value="3">MANAGER</option>-->
                                                 </select>
                                             </div>
                                             <button type="submit" class="btn btn-success d-block mx-auto">Add New User</button>
@@ -127,6 +128,7 @@
                                 <h4 class="m-2">About user</h4>
                             </div>
                         </div>
+
                         <div class="row" style="background-color: white">
                             <div class="container m-3">
                                 <table class="table table-striped">
@@ -155,6 +157,7 @@
         </div>
     </div>
 </div>
+
 <!--Редактирование пользователя-->
 <div th:each="user: ${users}" class="modal fade" th:id="'modalEdit'+${user.id}" tabindex="-1" role="dialog" aria-labelledby="modalEditLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -169,7 +172,7 @@
                 <div class="container">
                     <div class="row justify-content-center">
                         <div class="col">
-                            <form th:action="@{/update/{id}(id=${user.id})}" method="post" name="id" th:value="${user.id}" th:id="'user'+${user.id}">
+                            <form th:action="@{/admin/update/{id}(id=${user.id})}" method="post" name="id" th:value="${user.id}" th:id="'user'+${user.id}">
                                 <div class="form-group text-center font-weight-bold">
                                     <label for="idUserUpdate">ID</label>
                                     <input type="text" class="form-control" id="idUserUpdate" name="id" th:value="${user.id}" disabled>
@@ -188,9 +191,9 @@
                                         <tr th:each="role : ${roles}">
                                             <td><option th:value="${role.getId()}" th:text="${role.getRole()}"></option></td>
                                         </tr>
-                                        <option value="1" selected>USER</option>
-                                        <option value="2">ADMIN</option>
-                                        <option value="3">MANAGER</option>
+<!--                                        <option value="1" selected>USER</option>-->
+<!--                                        <option value="2">ADMIN</option>-->
+<!--                                        <option value="3">MANAGER</option>-->
                                     </select>
                                 </div>
                             </form>
@@ -221,7 +224,7 @@
                 <div class="container">
                     <div class="row justify-content-center">
                         <div class="col">
-                            <form th:action="@{/delete/{id}(id=${user.id})}" method="get" th:id="'userDelete'+${user.id}">
+                            <form th:action="@{/admin/delete}" method="post" th:id="'userDelete'+${user.id}">
                                 <div class="form-group text-center font-weight-bold">
                                     <label for="idUserDelete">ID</label>
                                     <input type="text" class="form-control" id="idUserDelete" name="id" th:value="${user.id}" disabled>
